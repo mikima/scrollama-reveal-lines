@@ -15,8 +15,20 @@ blueLine
   .attr("stroke-dasharray", bluelinelength)
   .attr("stroke-dashoffset", bluelinelength);
 
+let redDot = d3.select("#Layer_1").append("circle").attr("r", 10);
+
+d3.select("#Layer_1")
+  .attr("width", window.innerWidth)
+  .attr("height", (10580 / 2110) * window.innerWidth);
+
 function handleStepProgress(scroll) {
-  console.log("prog:", scroll.progress);
+  let position = redLine
+    .node()
+    .getPointAtLength(scroll.progress * redlinelength);
+
+  redDot.attr("cx", position.x).attr("cy", position.y);
+
+  console.log(position);
 
   redLine.attr(
     "stroke-dashoffset",
